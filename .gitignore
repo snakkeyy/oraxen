@@ -130,7 +130,6 @@ hs_err_pid*
 
 ### Gradle ###
 .gradle
-build/
 
 # Ignore Gradle GUI config
 gradle-app.setting
@@ -144,8 +143,6 @@ gradle-app.setting
 # # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
 # gradle/wrapper/gradle-wrapper.properties
 
-### Gradle Patch ###
-**/build/
 
 ### Eclipse ###
 .metadata
@@ -183,7 +180,6 @@ local.properties
 .buildpath
 
 # sbteclipse plugin
-.target
 
 # Tern plugin
 .tern-project
