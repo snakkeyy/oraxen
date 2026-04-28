@@ -24,15 +24,17 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: Build Plugin
-        # Building specifically the shadowJar for the paper platform
-        run: ./gradlew clean shadowJar
+      - name: Build All Modules
+        # Since your folders are version-specific, we run a general build
+        run: ./gradlew clean build shadowJar --no-daemon
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: Oraxen-Paper-Compatible
-          # This wildcard path looks into all submodules (like platforms/paper/build/libs)
-          path: "**/build/libs/Oraxen*.jar"
+          name: Oraxen-All-Versions
+          # This '**/ ' is the key: it searches every version folder (v1_21_R6, etc.) 
+          # for a build/libs directory and grabs the JARs.
+          path: "**/build/libs/*.jar"
+          if-no-files-found: error
           # Optional: prevents the workflow from failing if a specific JAR isn't found
           if-no-files-found: error 
