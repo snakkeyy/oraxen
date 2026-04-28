@@ -21,12 +21,18 @@ jobs:
           distribution: 'temurin'
           cache: 'gradle'
 
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
       - name: Build Plugin
-        # 'shadowJar' is often used in Oraxen to include all necessary libraries
-        run: ./gradlew clean build shadowJar 
+        # Building specifically the shadowJar for the paper platform
+        run: ./gradlew clean shadowJar
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: Oraxen-Paper-Compatible
-          path: build/libs/Oraxen*.jar
+          # This wildcard path looks into all submodules (like platforms/paper/build/libs)
+          path: "**/build/libs/Oraxen*.jar"
+          # Optional: prevents the workflow from failing if a specific JAR isn't found
+          if-no-files-found: error 
